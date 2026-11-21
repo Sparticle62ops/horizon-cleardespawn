@@ -1,0 +1,40 @@
+id = "cleardespawn"
+name = "ClearDespawn"
+version = "1.0.0"
+description = """Exact 1:1 Rust translation of [ClearDespawn](https://github.com/StrikerRockers-Mods/ClearDespawn)
+(upstream Java, MIT) by StrikerRockers-Mods. Carries the upstream license and credit.
+
+Ported for the Horizon client by sparticle.
+
+Item entities blink out as they near their despawn time: inside the last
+`flashStartTime` seconds of their lifetime the extended item entity renderer
+drops the item's draw on the flash schedule, and when `urgentFlash` is on the
+blink period shrinks with the remaining time so the flashing accelerates as the
+item approaches despawn.
+
+The package ships the full module tree (`constants`, `config`, `config_helper`,
+`services`, `render_item_entity_extended`, `clear_despawn`, `mod_menu`,
+`seams`), matching source revision on main. The mod API wires the original's
+three config entries as settings (upstream's own autoconfig lang keys as the
+labels) and runs the original's entry (`ClearDespawn.onInitializeClient()`,
+the extended item entity renderer registration) on client setup.
+
+Known seams (engine-stage; tracked):
+- the mod API has no surface for registering a custom renderer for an existing
+  entity type; the registration is recorded on the seam until one lands.
+
+Pinned to Horizon f00125f and horizon-mixins e59da909; exact 1:1 Rust port tested against those revisions.
+
+Licence: MIT (LICENSE carries the upstream text). Source: https://github.com/Sparticle62ops/horizon-cleardespawn
+"""
+authors = ["StrikerRocker", "Guntram Blohm", "sparticle"]
+license = "MIT"
+homepage = "https://github.com/Sparticle62ops/horizon-cleardespawn"
+api = "0.2"
+side = "client"
+capabilities = ["registries"]
+
+[native]
+game = "26.3"
+horizon = "f00125f61f794aaa3d4e950d301f353b35b6ee3d"
+mixins = "e59da9094f0c2fdda6c627fe9eff22dec6a906f0"
